@@ -7,11 +7,6 @@ logger = get_task_logger(__name__)
 
 
 @app.task
-def add(x, y):
-    return x + y
-
-
-@app.task
 def split(a, b):
     logger.info("from {0} to {1}".format(a,b))
     if a > b:
@@ -32,7 +27,6 @@ def crawl(url):
         logger.info("FINISHED status_code: {0} content-type:{1}".format(r.status_code, r.headers['content-type']))
     except requests.exceptions.RequestException as req_exc:
         logger.error("ERROR occur for {}".format(url))
-
 
 
 
