@@ -27,8 +27,12 @@ def split(a, b):
 @app.task(max_retries=3, default_retry_delay=2, rate_limit=1)
 def crawl(url):
     logger.info("START crawling {0}".format(url))
-    r = requests.get(url)
-    logger.info("FINISHED status_code: {0} content-type:{1}".format(r.status_code, r.headers['content-type']))
+    try:
+        r = requests.get(url)
+        logger.info("FINISHED status_code: {0} content-type:{1}".format(r.status_code, r.headers['content-type']))
+    except requests.exceptions.RequestException as req_exc:
+        logger.error("ERROR occur for {}".format(url))
+
 
 
 
