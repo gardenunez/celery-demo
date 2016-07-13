@@ -7,4 +7,4 @@ if __name__ == "__main__":
     fake = Factory.create()
     for i in xrange(5):
         url = fake.url()
-        tasks.crawl.apply_async((url,), countdown=i*3)
+        tasks.crawl.apply_async((url,), countdown=i*2)

@@ -4,12 +4,13 @@ from celery import Celery
 
 app = Celery('proj',
              broker='amqp://',
-             #backend='amqp://',
              include=['proj.tasks'])
 
-# Optional configuration, see the application user guide.
+# more info here: http://docs.celeryproject.org/en/latest/configuration.html
 app.conf.update(
     CELERY_TASK_RESULT_EXPIRES=3600,
+    CELERYD_CONCURRENCY=1,
+    CELERY_DEFAULT_RATE_LIMIT=5
 )
 
 if __name__ == '__main__':
